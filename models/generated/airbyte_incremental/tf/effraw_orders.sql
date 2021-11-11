@@ -54,6 +54,8 @@ select
 from {{ ref('effraw_orders_scd') }}
 -- effraw_orders from {{ source('tf', '_airbyte_raw_effraw_orders') }}
 where 1 = 1
+and pay_time is not null
+and status > 5
 and _airbyte_active_row = 1
 {{ incremental_clause('_airbyte_emitted_at') }}
 
